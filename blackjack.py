@@ -32,7 +32,7 @@ def new_game():
             new_game()
     else:
         print('| -> Zadejte prosím validní data (číslo)')
-        print('************** -- RESTART -- **************  ')
+        print('************** -- RESTART -- **************')
         new_game()
 
     deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
@@ -77,7 +77,7 @@ def new_game():
 
     def game_continues():
         print("|---------------------------------------")
-        print("| -> Hra pokračuje :)")
+        print("| -> Hra pokračuje")
         print(f"| -> Vaše karty -> {player_deck}")
         print(f"| -> Hodnota vašich karet -> {total_score_calculating(player_deck)}")
         # print(f"| -> Karty dealera -> {dealer_deck}")
@@ -101,7 +101,7 @@ def new_game():
     print("|    -> Double down -> '3'")
     game_choice = input("|    -> Váš výběr (1/2/3) -> ")
 
-    while game_choice == '1' and tokens > 0:
+    while game_choice == '1':
         player_deck.append(deck.pop())
         if total_score_calculating(player_deck) > 21:
             tokens -= game_tokens
@@ -125,6 +125,8 @@ def new_game():
             if end_choice.isnumeric():
                 end_choice = int(end_choice)
                 if end_choice == 1 and tokens == 0:
+                    end_choice = 2
+                    game_choice = 0
                     new_game()
                     print('Nová hra')
                 else:
@@ -134,13 +136,38 @@ def new_game():
         elif total_score_calculating(player_deck) < 21:
             game_continues()
 
-    if game_choice == '2':
-        while total_score_calculating(dealer_deck):
-            dealer_deck.append(deck.pop())
-        # if total_score_calculating(dealer_deck) > 21:
-            print("Deler to podělal, vyhráváš!")
+    while game_choice == '2':
+        if total_score_calculating(dealer_deck) < total_score_calculating(player_deck):
+            print("|---------------------------------------")
+            print('| -> Vyhráli jste :)')
+            tokens = tokens + game_tokens
             print(f"| -> Vaše karty -> {player_deck}")
+            print(f"| -> Hodnota vašich karet -> {total_score_calculating(player_deck)}")
             print(f"| -> Karty dealera -> {dealer_deck}")
-            tokens += game_tokens
+            print(f"| -> Hodnota karet dealera -> {total_score_calculating(dealer_deck)}")
+            game_choice = 0
+            print("|---------------------------------------")
+            print('| -> Přejete si začít další hru?')
+            print("| -> Možnosti:")
+            print("|    -> Ano -> '1'")
+            print("|    -> Ne -> '2'")
+            end_choice = input("|    -> Váš výběr (1/2) -> ")
+            if end_choice.isnumeric():
+                end_choice = int(end_choice)
+                if end_choice == 1 and tokens != 0:
+                    end_choice = 2
+                    game_choice = 0
+                    new_game()
+                    print('Nová hra')
+                else:
+                    print('bruh')
+            else:
+                print('Zadejte prosím 1/2')
+        elif total_score_calculating(dealer_deck) == total_score_calculating(player_deck):
+            print('stejne')
+            game_choice = 0
+        elif total_score_calculating(dealer_deck) > total_score_calculating(player_deck):
+            print('demente')
+            game_choice = 0
 
 new_game()
