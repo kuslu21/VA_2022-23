@@ -1,36 +1,51 @@
 from tkinter import *
+from tkinter.ttk import *
+window = Tk()
+# Widgety
+# Uvítací hláška
+welcome = Label(window, text="Vítejte v restauraci.", font=("Times New Roman", 30))
+welcome.place(x=155, y=10)
 
-error = False
+# Jméno burgeru, label a entry
+burger_name_label = Label(window, text="Jméno burgeru:", font=("Times New Roman", 15))
+burger_name_label.place(x=168, y=80)
+burger_name_entry = Entry(window, width=23)
+burger_name_entry.place(x=300, y=80)
 
-root = Tk()
-root.title("Burger konfigurátor")
-root.geometry('500x250')
-# jmeno ---------------------------------------------------------------------------
-lbl = Label(root, text="Jak se má burger jmenovat?")
-lbl.grid()
+# Výběr masa, label a combobox (drop down menu)
+meat_options_label = Label(window, text="Vyberte maso:", font=("Times New Roman", 15))
+meat_options_label.place(x=174, y=120)
+meat_options = ("Hovezí", "Kuřecí", "Krůtí", "Ryba")
+meat_options_combobox = Combobox(window, values=meat_options)
+meat_options_combobox.place(x=300, y=120)
 
-name = Entry(root, width=12)
-name.grid(column=1, row=0)
-# maso ----------------------------------------------------------------------------
-lbl2 = Label(root, text="Jaké maso by jste chtěli? Možnosti -> hovězí, kuřecí, ryba :((")
-lbl2.grid()
+# Výběr žemle, labely a combobox (drop down menu)
+buns_options_label = Label(window, text="Vyberte žemli:", font=("Times New Roman", 15))
+buns_options_label.place(x=174, y=160)
+buns_options = ("Domácí houska", "Bulka", "Brioška na burger")
+buns_options_combobox = Combobox(window, values=buns_options)
+buns_options_combobox.place(x=300, y=160)
 
-meat = Entry(root, width=12)
-meat.grid(column=1, row=0)
-# --------------------------------------------------------------------------------
-if name != "" and error is not True:
-    # function to display user text when
-    # button is clicked
-    def clicked():
-        res = "Hotovo, Burger se jmenuje:" + name.get()
-        lbl.configure(text=res)
+# Výběr zeleniny, labely a listbox (menu)
+vegetable_options_label = Label(window, text="Vyberte zeleninu:", font=("Times New Roman", 15))
+vegetable_options_label.place(x=153, y=200)
+vegetable_options = ("Rajče", "Salát", "Okurka")
+vegetable_options_listbox = Listbox(window, height=3, width=23, selectmode='multiple')
+for num in vegetable_options:
+    vegetable_options_listbox.insert(END, num)
+vegetable_options_listbox.place(x=300, y=200)
 
+# Výběr omáčky, labely a combobox (drop down menu)
+sauce_options_label = Label(window, text="Vyberte omáčku:", font=("Times New Roman", 15))
+sauce_options_label.place(x=157, y=270)
+sauce_options = ("Kečup", "Majonéza", "BBQ omáčka")
+sauce_options_combobox = Combobox(window, values=sauce_options)
+sauce_options_combobox.place(x=300, y=270)
 
-    # # button widget with red color text inside
-    # btn = Button(root, text="Click me",
-    #              fg="red", command=clicked)
-    # # Set Button Grid
-    # btn.grid(column=2, row=0)
-    #
-    # # Execute Tkinter
-    root.mainloop()
+# Tlačítko na potvrzení
+submit_button=Button(window, text="Hotovo")
+submit_button.place(x=250, y=310)
+
+window.title('Hello Python')
+window.geometry("600x600")
+window.mainloop()
