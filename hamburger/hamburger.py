@@ -63,12 +63,9 @@ def button_clicked():
     burger_name_get = burger_name_entry.get()
     meat_options_get = meat_options_combobox.get()
     buns_options_get = buns_options_combobox.get()
-<<<<<<< HEAD
     vegetable_tomato = tomato.get()
     vegetable_salad = salad.get()
     vegetable_pickle = pickle.get()
-=======
->>>>>>> origin/master
     sauce_options_get = sauce_options_combobox.get()
     if burger_name_get == "":
         err_screen = Toplevel(window)
@@ -86,7 +83,6 @@ def button_clicked():
         err_screen = Toplevel(window)
         err_screen.geometry("170x50")
         Label(err_screen, text="Vyberte si omáčku prosím.").pack()
-<<<<<<< HEAD
     elif vegetable_tomato == 0 and vegetable_salad == 0 and vegetable_pickle == 0:
         err_screen = Toplevel(window)
         err_screen.geometry("170x50")
@@ -125,14 +121,6 @@ def button_clicked():
             img_print = tkinter.Label(window, image=img_buttom_brioska)
             img_print.PhotoImage = img_buttom_brioska
             img_print.place(x=155, y=340)
-=======
-    elif err == "":
-        clear_window()
-        img = ImageTk.PhotoImage(Image.open("img/cute_rat.jpeg"))
-        img_print = tkinter.Label(window, image=img)
-        img_print.PhotoImage = img
-        img_print.pack()
->>>>>>> origin/master
 
         if meat_options_get == "Hovezí":
             print(meat_options_get)
@@ -204,6 +192,7 @@ def button_clicked():
             img_print = tkinter.Label(window, image=img_sauce_bbq)
             img_print.PhotoImage = img_sauce_bbq
             img_print.place(x=155, y=304)
+
 
 # Tlačítko na potvrzení
 Button(window, text="Hotovo", command=button_clicked).place(x=250, y=310)
