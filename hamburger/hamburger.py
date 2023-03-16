@@ -40,11 +40,8 @@ buns_options_combobox.place(x=300, y=160)
 # Výběr zeleniny, labely a listbox (menu)
 vegetable_options_label = Label(window, text="Vyberte zeleninu:", font=("Times New Roman", 15))
 vegetable_options_label.place(x=153, y=200)
-vegetable_options = ("Rajče", "Salát", "Okurka")
-vegetable_options_listbox = Listbox(window, height=3, width=23, selectmode='multiple')
-for num in vegetable_options:
-    vegetable_options_listbox.insert(END, num)
-vegetable_options_listbox.place(x=300, y=200)
+vegetable_options_checkbox = Checkbutton(window, text="Rajče")
+vegetable_options_checkbox.place(x=153, y=200)
 
 # Výběr omáčky, labely a combobox (drop down menu)
 sauce_options_label = Label(window, text="Vyberte omáčku:", font=("Times New Roman", 15))
@@ -55,27 +52,37 @@ sauce_options_combobox.place(x=300, y=270)
 
 
 def button_clicked():
-    burger_name = burger_name_entry.get()
-    if burger_name_entry == "":
-        name_err_screen = Toplevel(window)
-        name_err_screen.geometry("150x90")
-        Label(name_err_screen, text="Vypňte jméno prosím").pack()
-    else:
+    err = ""
+    burger_name_get = burger_name_entry.get()
+    meat_options_get = meat_options_combobox.get()
+    buns_options_get = buns_options_combobox.get()
+    sauce_options_get = sauce_options_combobox.get()
+    if burger_name_get == "":
+        err_screen = Toplevel(window)
+        err_screen.geometry("150x50")
+        Label(err_screen, text="Vypňte jméno prosím").pack()
+    elif meat_options_get == "":
+        err_screen = Toplevel(window)
+        err_screen.geometry("150x50")
+        Label(err_screen, text="Vyberte maso prosím.").pack()
+    elif buns_options_get == "":
+        err_screen = Toplevel(window)
+        err_screen.geometry("150x50")
+        Label(err_screen, text="Vyberte žemli prosím.").pack()
+    elif sauce_options_get == "":
+        err_screen = Toplevel(window)
+        err_screen.geometry("170x50")
+        Label(err_screen, text="Vyberte si omáčku prosím.").pack()
+    elif err == "":
         clear_window()
-        img = ImageTk.PhotoImage(Image.open("img/cute_rat.jpg"))
+        img = ImageTk.PhotoImage(Image.open("img/cute_rat.jpeg"))
         img_print = tkinter.Label(window, image=img)
         img_print.PhotoImage = img
         img_print.pack()
 
 
-
 # Tlačítko na potvrzení
 Button(window, text="Hotovo", command=button_clicked).place(x=250, y=310)
-
-
-# img = ImageTk.PhotoImage(Image.open("img/cute_rat.jpg"))
-# img_label = Label(window, image=img)
-# img_label.place(x=250, y=350)
 
 window.title('Hello Python')
 window.geometry("600x600")
