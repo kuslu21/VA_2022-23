@@ -58,8 +58,10 @@ sauce_options_combobox = Combobox(window, values=sauce_options)
 sauce_options_combobox.place(x=300, y=270)
 
 
+# Provede se po zmáčknutí tlačítka
 def button_clicked():
     err = ""
+    # získám informace z inputů
     burger_name_get = burger_name_entry.get()
     meat_options_get = meat_options_combobox.get()
     buns_options_get = buns_options_combobox.get()
@@ -67,6 +69,7 @@ def button_clicked():
     vegetable_salad = salad.get()
     vegetable_pickle = pickle.get()
     sauce_options_get = sauce_options_combobox.get()
+    # Kontrola, jestli jsou všechny inputy vyplňené
     if burger_name_get == "":
         err_screen = Toplevel(window)
         err_screen.geometry("150x50")
@@ -87,13 +90,10 @@ def button_clicked():
         err_screen = Toplevel(window)
         err_screen.geometry("170x50")
         Label(err_screen, text="Vyberte si zeleninu.").pack()
+    # Pokud je vše vyplněno, printuji obrázky, podle toho, jak si uživatel navolil
     elif err == "":
         clear_window()
-        print(buns_options_get)
-        # img = ImageTk.PhotoImage(Image.open("img/cute_rat.jpg"))
-        # img_print = tkinter.Label(window, image=img)
-        # img_print.PhotoImage = img
-        # img_print.pack()
+        # Zobrazím domácí housku
         if buns_options_get == "Domácí houska":
             img_top_domaci = ImageTk.PhotoImage(Image.open("img/top_domaci.png"))
             img_print = tkinter.Label(window, image=img_top_domaci)
@@ -103,6 +103,7 @@ def button_clicked():
             img_print = tkinter.Label(window, image=img_buttom_domaci)
             img_print.PhotoImage = img_buttom_domaci
             img_print.place(x=155, y=340)
+        # Zobrazím bulku
         elif buns_options_get == "Bulka":
             img_top_bulka = ImageTk.PhotoImage(Image.open("img/top_bulka.png"))
             img_print = tkinter.Label(window, image=img_top_bulka)
@@ -112,6 +113,7 @@ def button_clicked():
             img_print = tkinter.Label(window, image=img_buttom_bulka)
             img_print.PhotoImage = img_buttom_bulka
             img_print.place(x=155, y=340)
+        # Zobrazím Brioška na burger
         elif buns_options_get == "Brioška na burger":
             img_top_brioska = ImageTk.PhotoImage(Image.open("img/top_brioska.png"))
             img_print = tkinter.Label(window, image=img_top_brioska)
@@ -122,31 +124,28 @@ def button_clicked():
             img_print.PhotoImage = img_buttom_brioska
             img_print.place(x=155, y=340)
 
+        # Zobrazuje maso podle volby
         if meat_options_get == "Hovezí":
-            print(meat_options_get)
             img_meat_hovezi = ImageTk.PhotoImage(Image.open("img/meat_hovezi.png"))
             img_print = tkinter.Label(window, image=img_meat_hovezi)
             img_print.PhotoImage = img_meat_hovezi
             img_print.place(x=155, y=150)
         elif meat_options_get == "Kuřecí":
-            print(meat_options_get)
             img_meat_kureci = ImageTk.PhotoImage(Image.open("img/meat_kureci.png"))
             img_print = tkinter.Label(window, image=img_meat_kureci)
             img_print.PhotoImage = img_meat_kureci
             img_print.place(x=155, y=150)
         elif meat_options_get == "Krůtí":
-            print(meat_options_get)
             img_meat_kruti = ImageTk.PhotoImage(Image.open("img/meat_kruti.png"))
             img_print = tkinter.Label(window, image=img_meat_kruti)
             img_print.PhotoImage = img_meat_kruti
             img_print.place(x=155, y=150)
         elif meat_options_get == "Ryba":
-            print(meat_options_get)
             img_meat_ryba = ImageTk.PhotoImage(Image.open("img/meat_ryba.png"))
             img_print = tkinter.Label(window, image=img_meat_ryba)
             img_print.PhotoImage = img_meat_ryba
             img_print.place(x=155, y=150)
-
+        # Zobrazuji zeleninu podle volby
         if vegetable_tomato == 1:
             img_vegetable_tomato = ImageTk.PhotoImage(Image.open("img/vegetable_rajce.png"))
             img_print = tkinter.Label(window, image=img_vegetable_tomato)
@@ -156,6 +155,7 @@ def button_clicked():
             img_vegetable_salad = ImageTk.PhotoImage(Image.open("img/vegetable_salat.png"))
             img_print = tkinter.Label(window, image=img_vegetable_salad)
             img_print.PhotoImage = img_vegetable_salad
+            # Řazení zeleniny, aby nebyly volná místa
             if vegetable_tomato == 1:
                 img_print.place(x=155, y=224)
             else:
@@ -164,6 +164,7 @@ def button_clicked():
             img_vegetable_pickle = ImageTk.PhotoImage(Image.open("img/vegetable_okurka.png"))
             img_print = tkinter.Label(window, image=img_vegetable_pickle)
             img_print.PhotoImage = img_vegetable_pickle
+            # Řazení zeleniny, aby nebyly volná místa
             if vegetable_tomato == 1:
                 if vegetable_salad == 1:
                     img_print.place(x=155, y=264)
@@ -173,21 +174,26 @@ def button_clicked():
                 img_print.place(x=155, y=224)
             else:
                 img_print.place(x=155, y=184)
-
+        # Zobrazuji omáčku podle volby
         if sauce_options_get == "Kečup":
-            print(sauce_options_get)
             img_sauce_ketchup = ImageTk.PhotoImage(Image.open("img/sauce_kecup.png"))
             img_print = tkinter.Label(window, image=img_sauce_ketchup)
             img_print.PhotoImage = img_sauce_ketchup
-            img_print.place(x=155, y=304)
+            if vegetable_tomato == 1:
+                if vegetable_salad == 1:
+                    img_print.place(x=155, y=264)
+                else:
+                    img_print.place(x=155, y=224)
+            elif vegetable_salad == 1:
+                img_print.place(x=155, y=224)
+            else:
+                img_print.place(x=155, y=184)
         if sauce_options_get == "Majonéza":
-            print(sauce_options_get)
             img_sauce_majonese = ImageTk.PhotoImage(Image.open("img/sauce_majoneza.png"))
             img_print = tkinter.Label(window, image=img_sauce_majonese)
             img_print.PhotoImage = img_sauce_majonese
             img_print.place(x=155, y=304)
         if sauce_options_get == "BBQ omáčka":
-            print(sauce_options_get)
             img_sauce_bbq = ImageTk.PhotoImage(Image.open("img/sauce_BBQ.png"))
             img_print = tkinter.Label(window, image=img_sauce_bbq)
             img_print.PhotoImage = img_sauce_bbq
